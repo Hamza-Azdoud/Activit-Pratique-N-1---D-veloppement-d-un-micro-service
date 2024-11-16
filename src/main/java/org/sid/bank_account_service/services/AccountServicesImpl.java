@@ -4,6 +4,7 @@ import org.sid.bank_account_service.Repositories.BankAccountRepository;
 import org.sid.bank_account_service.dto.BankAccountRequestDTO;
 import org.sid.bank_account_service.dto.BankAccountResponesDTO;
 import org.sid.bank_account_service.entities.BankAccount;
+import org.sid.bank_account_service.mappers.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ import java.util.UUID;
 public class AccountServicesImpl implements AccountServices {
     @Autowired
     private BankAccountRepository bankAccountRepository;
+    @Autowired
+    private AccountMapper accountMapper;
+
 
     @Override
     public BankAccountResponesDTO addAccount(BankAccountRequestDTO bankAccountDTO) {
@@ -29,14 +33,7 @@ public class AccountServicesImpl implements AccountServices {
 
 
         BankAccount savebankAccount = bankAccountRepository.save(bankAccount);
-
-        BankAccountResponesDTO bankAccountResponesDTO = BankAccountResponesDTO.builder()
-                .id(savebankAccount.getId())
-                .createdAt(savebankAccount.getCreatedAt())
-                .balence(savebankAccount.getBalence())
-                .type(savebankAccount.getType())
-                .currency(savebankAccount.getCurrency())
-                .build();
+        BankAccountResponesDTO bankAccountResponesDTO = accountMapper.fromBankAccount(savebankAccount);
         return bankAccountResponesDTO;
     }
 
