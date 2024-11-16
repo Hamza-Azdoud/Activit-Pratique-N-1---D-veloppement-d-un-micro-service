@@ -26,7 +26,7 @@ public class BankAccountServiceApplication {
 				BankAccount bankAccount = BankAccount.builder()
 						.id(UUID.randomUUID().toString())
 						.type(Math.random() >0.5? AccountType.CURRENT_ACCOUNT: AccountType.SAVING_ACCOUNT)
-						.balence(1000+Math.random()*90000)
+						.balance(1000+Math.random()*90000)
 						.createdAt(new Date())
 						.currency("MAD")
 						.build();

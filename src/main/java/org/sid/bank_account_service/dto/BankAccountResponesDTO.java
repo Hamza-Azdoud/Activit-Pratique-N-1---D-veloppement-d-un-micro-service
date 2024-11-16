@@ -16,7 +16,7 @@ import java.util.Date;
 public class BankAccountResponesDTO {
     private String id;
     private Date createdAt;
-    private Double balence;
+    private Double balance;
     private String currency;
     private AccountType type;
 }
